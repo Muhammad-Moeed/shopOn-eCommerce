@@ -7,15 +7,18 @@ import Typography from '@mui/material/Typography';
 import Menu from '@mui/material/Menu';
 import MenuIcon from '@mui/icons-material/Menu';
 import Container from '@mui/material/Container';
-import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
-import AdbIcon from '@mui/icons-material/Adb';
+import SearchIcon from '@mui/icons-material/Search';
+import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
+import PersonOutlinedIcon from '@mui/icons-material/PersonOutlined';
+import TextField from '@mui/material/TextField';
+import InputAdornment from '@mui/material/InputAdornment';
 import logo from '../assets/logo.png';
 
 const pages = ['GIFT CARDS', 'HOME', 'MOBILES & TABLETS', 'FASHION' , 'ELECTRONICS', 'BRANDS'];
-const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
+const settings = ['BECOME A SELLER', 'SELLER LOGIN', 'LOGIN', 'REGISTER'];
 
 function ResponsiveAppBar() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
@@ -37,95 +40,53 @@ function ResponsiveAppBar() {
   };
 
   return (
-    <AppBar position="static" sx={{ backgroundColor: '#ececec' }}>
+    <AppBar position="static" sx={{ backgroundColor: '#ececec', boxShadow: 'none' }}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-        <img src={logo} alt="Logo" width="100" height="50" />
-          <Typography
-            variant="h6"
-            noWrap
-            component="a"
-            href="#app-bar-with-responsive-menu"
-            sx={{
-              mr: 2,
-              display: { xs: 'none', md: 'flex' },
-              fontFamily: 'monospace',
-              fontWeight: 700,
-              letterSpacing: '.3rem',
-              color: 'inherit',
-              textDecoration: 'none',
-            }}
-          >
-          </Typography>
-
-          <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
-            <IconButton
-              size="large"
-              aria-label="account of current user"
-              aria-controls="menu-appbar"
-              aria-haspopup="true"
-              onClick={handleOpenNavMenu}
-              color="inherit"
-            >
-              <MenuIcon />
-            </IconButton>
-            <Menu
-              id="menu-appbar"
-              anchorEl={anchorElNav}
-              anchorOrigin={{
-                vertical: 'bottom',
-                horizontal: 'left',
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: 'top',
-                horizontal: 'left',
-              }}
-              open={Boolean(anchorElNav)}
-              onClose={handleCloseNavMenu}
-              sx={{ display: { xs: 'block', md: 'none' }}}
-            >
-              {pages.map((page) => (
-                <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  <Typography sx={{ textAlign: 'center'}}>{page}</Typography>
-                </MenuItem>
-              ))}
-            </Menu>
-          </Box>
-          <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
-          <Typography
-            variant="h5"
-            noWrap
-            component="a"
-            href="#app-bar-with-responsive-menu"
-            sx={{
-              mr: 2,
-              display: { xs: 'flex', md: 'none' },
-              flexGrow: 1,
-              fontFamily: 'monospace',
-              fontWeight: 700,
-              letterSpacing: '.3rem',
-              color: 'inherit',
-              textDecoration: 'none',
-            }}
-          >
-            LOGO
-          </Typography>
-          <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
+          <IconButton size="small" edge="start" color="inherit" aria-label="menu" onClick={handleOpenNavMenu} sx={{ mr: 1 }}>
+            <MenuIcon fontSize="small" />
+          </IconButton>
+          <img src={logo} alt="Logo" width="80" height="40" />
+          <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' }, alignItems: 'center' }}>
             {pages.map((page) => (
               <Button
                 key={page}
                 onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: 'black', display: 'block' }}
+                sx={{ my: 2, color: 'black', display: 'block', fontSize: '10px', marginRight: '8px' }}
               >
                 {page}
               </Button>
             ))}
           </Box>
-          <Box sx={{ flexGrow: 0 }}>
+          <TextField
+            variant="outlined"
+            size="small"
+            placeholder="Search Product"
+            onFocus={(e) => e.target.placeholder = ""}
+            onBlur={(e) => e.target.placeholder = "Search Product"}
+            sx={{
+              backgroundColor: 'white',
+              borderRadius: '4px',
+              marginRight: '10px',
+              '& fieldset': { border: 'none' }
+            }}
+            InputProps={{
+              endAdornment: (
+                <InputAdornment position="end">
+                  <IconButton sx={{ backgroundColor: 'green', color: 'white', borderRadius: '4px', '&:hover': { backgroundColor: 'green' } }}>
+                    <SearchIcon />
+                  </IconButton>
+                </InputAdornment>
+              )
+            }}
+          />
+          <IconButton sx={{ color: 'black', marginRight: '15px' }}>
+            <ShoppingCartOutlinedIcon />
+          </IconButton>
+          <Box sx={{ flexGrow: 0, marginRight: '15px' }}>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+                <PersonOutlinedIcon />
               </IconButton>
             </Tooltip>
             <Menu
@@ -146,7 +107,7 @@ function ResponsiveAppBar() {
             >
               {settings.map((setting) => (
                 <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                  <Typography sx={{ textAlign: 'center' }}>{setting}</Typography>
+                  <Typography sx={{ textAlign: 'center', fontSize: '12px' }}>{setting}</Typography>
                 </MenuItem>
               ))}
             </Menu>
