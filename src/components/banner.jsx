@@ -18,13 +18,15 @@ const banners = [banner1, banner2, banner3, banner4, banner5, banner6, banner7, 
 
 const ImageCarousel = () => {
   return (
-    <Carousel controls={true} indicators={true} pause={false} interval={2000}>
-      {banners.map((banner, index) => (
-        <Carousel.Item key={index}>
-          <img className="d-block w-100" src={banner} alt={`Slide ${index + 1}`} />
-        </Carousel.Item>
-      ))}
-    </Carousel>
+    <div className="mb-5 pb-3 bg-white">
+      <Carousel controls={true} indicators={true} pause={false} interval={2000}>
+        {banners.map((banner, index) => (
+          <Carousel.Item key={index}>
+            <img className="d-block w-100" src={banner} alt={`Slide ${index + 1}`} />
+          </Carousel.Item>
+        ))}
+      </Carousel>
+    </div>
   );
 };
 
